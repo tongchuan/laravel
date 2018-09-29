@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Controllers\User\UserController;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +13,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return 'Hello World';
+    // return view('welcome');
 });
+
+Route::get('/user', 'User\UserController@index');
