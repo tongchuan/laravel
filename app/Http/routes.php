@@ -16,5 +16,11 @@ Route::get('/', function () {
   return 'Hello World';
     // return view('welcome');
 });
-
-Route::get('/user', 'User\UserController@index');
+Route::get('/user', function () {
+  return '{
+  	"name": "张彤川",
+  	"age": 30
+  }';
+    // return view('welcome');
+});
+// Route::get('/user', 'User\UserController@index');
