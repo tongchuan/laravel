@@ -13,7 +13,7 @@
 */
 
 Route::get('/', function () {
-  return 'Hello World11111';
+  return 'Hello World Test';
     // return view('welcome');
 });
 Route::get('/user', function () {
