@@ -85,5 +85,5 @@ Route::get('users/profile', ['as' => 'profile', function () {
 }]);
 
 Route::get('u/profile', [
-    'as' => 'profileuser', 'uses' => 'UserController@showProfile'
+    'as' => 'profileuser', 'uses' => 'User\UserController@showProfile'
 ]);
