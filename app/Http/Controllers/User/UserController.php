@@ -14,6 +14,9 @@ class UserController extends Controller
       // return var_dump($users);
       return view('user.index', ['users' => $users]);
   }
+  public function showProfile(){
+    return 'showProfile';
+  }
 }
 
 ?>
