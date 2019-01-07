@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\News;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
