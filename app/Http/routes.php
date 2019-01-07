@@ -24,6 +24,20 @@ Route::get('/user', function () {
     // return view('welcome');
 });
 
+Route::group(['namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
+    Route::get('/', ['as' => 'index','uses' => 'NewsController@index']);
+    Route::get('/add', ['as' => 'add','uses' => 'NewsController@add']);
+    Route::get('/update', ['as' => 'update','uses' => 'NewsController@update']);
+    Route::get('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
+    Route::get('/query', ['as' => 'query','uses' => 'NewsController@query']);
+
+    Route::get('/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
+    Route::get('/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
+    Route::get('/typeupdate', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
+    Route::get('/typedelete', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
+    Route::get('/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
+});
+
 Route::get('foo', function() {
 	return 'foo get';
 });
@@ -79,11 +93,84 @@ Route::get('user1/{name?}', function ($name = 'John') {
 // Route::get('/user', 'User\UserController@index');
 
 // 命名路由为生成 URL 或重定向提供了便利。实现也很简单，在定义路由时使用数组键 as 指定路由名称：
-
+// http://97.64.37.117:8888/users/profile users/profile
 Route::get('users/profile', ['as' => 'profile', function () {
     return 'users/profile';
 }]);
 
+// http://97.64.37.117:8888/u/profile showProfile
 Route::get('u/profile', [
     'as' => 'profileuser', 'uses' => 'User\UserController@showProfile'
 ]);
+
+/**
+ * 这就是一个路由分组 /user和/user/profile都将使用auth中间件。
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/user', function (){
+
+    });
+
+    Route::get('/user/profile', function (){
+        
+    });
+});
+ */
+
+/**
+ * 路由前缀呢 就是讲此分组中的所有路由路径前加个前缀
+
+Route::group(['prefix' => 'admin'], function (){
+
+     路由分组是可以嵌套的哦
+
+    Route::group(['middleware' => 'auth'], function (){
+
+         这条路由不仅使用auth中间件,而且还加了admin前缀,我们通过/admin/user才能访问
+
+        Route::get('/user', function (){
+
+        });
+
+        Route::get('/user/profile', function (){
+
+        });
+    });
+
+     访问路径是:/admin
+
+    Route::get('/', function (){
+        
+    });;
+});
+ */
+
+
+/**
+ * 比如我们可以输入larger来访问路由,在子路由中可以通过参数来把larger取到。
+
+Route::group(['domain' => '{account}.myapp.com'], function () {
+    Route::get('user/{id}', function ($account, $id) {
+        //
+    });
+});
+ */
+
+ /**
+ * 只要指明了命名空间,那么在子路由中所使用的所有控制器都位于App\Http\Controller\Admin这个命名空间下。
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
+    其实HomeController在App\Http\Controller\Admin这个命名空间下。
+    Route::get('/', 'HomeController@index');
+});
+
+ */
+
+
+/**
+ * 跟普通路由一样 也是用as来命名但是首字母最好大写后面跟俩冒号 代表它是一个分组 如果这样写 我们就可以通过 route('Admin::index')方式来找到它了
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin::'], function(){
+    Route::get('/', ['as' => 'index','uses' => 'HomeController@index']);
+});
+ */
