@@ -24,7 +24,7 @@ Route::get('/user', function () {
     // return view('welcome');
 });
 
-Route::group(['namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
+Route::group(['middleware'=>'cors', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
     Route::get('/', ['as' => 'index','uses' => 'NewsController@index']);
     Route::get('/add', ['as' => 'add','uses' => 'NewsController@add']);
     Route::get('/update', ['as' => 'update','uses' => 'NewsController@update']);
