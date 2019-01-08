@@ -107,7 +107,7 @@ class NewsTypeController extends Controller
     $data["modify_time"]=$request->input("modify_time",null);
     DB::table($this->table)
       ->where('id',$id)
-      ->update($data)
+      ->update($data);
     return var_dump($request);
   }
   public function delete(Request $request,$id){
