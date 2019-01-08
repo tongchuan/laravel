@@ -117,7 +117,7 @@ class NewsTypeController extends Controller
 
   }
   public function query(Request $request){
-    $data = DB::table($this->table)->get()
+    $data = DB::table($this->table)->get();
     return json_encode($data);
     // return var_dump($request);
   }
