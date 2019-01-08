@@ -31,11 +31,11 @@ Route::group(['namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], func
     Route::get('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
     Route::get('/query', ['as' => 'query','uses' => 'NewsController@query']);
 
-    Route::get('/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
-    Route::get('/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
-    Route::get('/typeupdate', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
-    Route::get('/typedelete', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
-    Route::get('/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
+    Route::match(['get', 'post'], '/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
+    Route::match(['get', 'post'], '/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
+    Route::match(['get', 'post'], '/typeupdate/{id}', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
+    Route::match(['get', 'post'], '/typedelete/{id}', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
+    Route::match(['get', 'post'], '/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
 });
 
 Route::get('foo', function() {

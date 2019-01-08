@@ -4,3 +4,5 @@
 Homestead.yaml
 Homestead.json
 public/.user.ini
+
+#php artisan config:cache

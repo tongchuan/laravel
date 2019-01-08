@@ -34,14 +34,14 @@ class NewsTypeController extends Controller
     $data["link"]=$request->input("link",null);
     $data["link_spic"]=$request->input("link_spic",null);
     $data["link_bpic"]=$request->input("link_bpic",null);
-    $data["show"]=$request->input("show",null);
-    $data["status"]=$request->input("status",null);
-    $data["hot"]=$request->input("hot",null);
-    $data["top"]=$request->input("top",null);
-    $data["recommend"]=$request->input("recommend",null);
-    $data["comm"]=$request->input("comm",null);
-    $data["vote"]=$request->input("vote",null);
-    $data["delete"]=$request->input("delete",null);
+    $data["show"]=$request->input("show",0);
+    $data["status"]=$request->input("status",0);
+    $data["hot"]=$request->input("hot",0);
+    $data["top"]=$request->input("top",0);
+    $data["recommend"]=$request->input("recommend",0);
+    $data["comm"]=$request->input("comm",0);
+    $data["vote"]=$request->input("vote",0);
+    $data["delete"]=$request->input("delete",0);
     $data["create_man"]=$request->input("create_man",null);
     $data["create_time"]=$request->input("create_time",null);
     $data["modify_man"]=$request->input("modify_man",null);
@@ -76,14 +76,49 @@ class NewsTypeController extends Controller
     // json_decode(json)
     return var_dump($request);
   }
-  public function update(Request $request){
+  public function update(Request $request,$id){
+    $data = array();
+    $data["parentid"]=$request->input("parentid",null);
+    $data["name"]=$request->input("name",null);
+    $data["cnname"]=$request->input("cnname",null);
+    $data["enname"]=$request->input("enname",null);
+    $data["link_nav"]=$request->input("link_nav",null);
+    $data["content_nav"]=$request->input("content_nav",null);
+    $data["tags"]=$request->input("tags",null);
+    $data["tags_seo"]=$request->input("tags_seo",null);
+    $data["keyword"]=$request->input("keyword",null);
+    $data["remark"]=$request->input("remark",null);
+    $data["small_pic"]=$request->input("small_pic",null);
+    $data["big_pic"]=$request->input("big_pic",null);
+    $data["link"]=$request->input("link",null);
+    $data["link_spic"]=$request->input("link_spic",null);
+    $data["link_bpic"]=$request->input("link_bpic",null);
+    $data["show"]=$request->input("show",0);
+    $data["status"]=$request->input("status",0);
+    $data["hot"]=$request->input("hot",0);
+    $data["top"]=$request->input("top",0);
+    $data["recommend"]=$request->input("recommend",0);
+    $data["comm"]=$request->input("comm",0);
+    $data["vote"]=$request->input("vote",0);
+    $data["delete"]=$request->input("delete",0);
+    $data["create_man"]=$request->input("create_man",null);
+    $data["create_time"]=$request->input("create_time",null);
+    $data["modify_man"]=$request->input("modify_man",null);
+    $data["modify_time"]=$request->input("modify_time",null);
+    DB::table($this->table)
+      ->where('id',$id)
+      ->update($data)
     return var_dump($request);
   }
-  public function delete(Request $request){
-    return var_dump($request);
+  public function delete(Request $request,$id){
+    // DB::table($this->table)->where('id', '<', 100)->delete();
+    return DB::table($this->table)->where('id', $id)->delete();
+    // return var_dump($request);
+
   }
   public function query(Request $request){
-    return var_dump($request);
+    return json_decode(DB::table($this->table)-get());
+    // return var_dump($request);
   }
 }
 
