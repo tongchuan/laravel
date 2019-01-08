@@ -117,7 +117,7 @@ class NewsTypeController extends Controller
 
   }
   public function query(Request $request){
-    return json_decode(DB::table($this->table)-get());
+    return json_decode(DB::table($this->table)->get());
     // return var_dump($request);
   }
 }
