@@ -28,7 +28,7 @@ class NewsTypeController extends Controller
     // $name = $request->input('products.0.name'); 数组
     $data['query'] = $request->query();
     $data['name'] = $request->name;
-    return json_encode($data)；
+    return json_encode($data);
     // if ($request->has(['name', 'email'])) {
     // if ($request->has('name')) {
         // 是否存在
