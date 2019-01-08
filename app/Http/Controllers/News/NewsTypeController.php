@@ -49,6 +49,7 @@ class NewsTypeController extends Controller
 // DB::table('users')->insert(
 //     ['email' => 'john@example.com', 'votes' => 0]
 // );
+    return json_encode($data);
     $id = DB::table($this->table)->insertGetId(
         $data
     );
