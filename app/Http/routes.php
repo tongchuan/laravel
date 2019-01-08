@@ -38,10 +38,10 @@ Route::group(['middleware'=>'cors', 'namespace' => 'News', 'prefix' => 'news', '
     Route::match(['get', 'post'], '/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
 });
 
-Route::get('foo', function() {
+Route::get('/foo', function() {
 	return 'foo get';
 });
-Route::post('foo', function() {
+Route::post(['middleware'=>'cors'],'/foo', function() {
 	return '{"data": "post foo"}';
 });
 Route::put('foo', function() {
