@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\News;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -7,6 +7,7 @@ class NewsController extends Controller
 {
   public function __construct()
   {
+    $this->table = 't_news';
   }
   public function index(Request $request)
   {
@@ -16,6 +17,7 @@ class NewsController extends Controller
       // return view('user.index', ['users' => $users]);
   }
   public function add(Request $request){
+    // DB::insert('insert into')
     return var_dump($request);
   }
   public function update(Request $request){

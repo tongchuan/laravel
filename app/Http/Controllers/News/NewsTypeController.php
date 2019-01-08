@@ -16,6 +16,24 @@ class NewsTypeController extends Controller
       // return view('user.index', ['users' => $users]);
   }
   public function add(Request $request){
+    $data = null;
+    $data['input'] = $request->input();
+    $data['name'] = $request->input('name','name1111');
+    $data['path'] = $request->path();
+    $data['url'] = $request->url();
+    $data['fullUrl'] = $request->fullUrl();
+    $data['method'] = $request->method();
+    $data['isMethod'] = $request->isMethod('post');
+    $data['all'] = $request->all();
+    // $name = $request->input('products.0.name'); 数组
+    $data['query'] = $request->query();
+    $data['name'] = $request->name;
+    return json_encode($data)；
+    // if ($request->has(['name', 'email'])) {
+    // if ($request->has('name')) {
+        // 是否存在
+    // }
+    // json_decode(json)
     return var_dump($request);
   }
   public function update(Request $request){
