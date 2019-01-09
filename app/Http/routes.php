@@ -25,11 +25,11 @@ Route::get('/user', function () {
 });
 
 Route::group(['middleware'=>'cors', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
-    Route::get('/', ['as' => 'index','uses' => 'NewsController@index']);
-    Route::get('/add', ['as' => 'add','uses' => 'NewsController@add']);
-    Route::get('/update', ['as' => 'update','uses' => 'NewsController@update']);
-    Route::get('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
-    Route::get('/query', ['as' => 'query','uses' => 'NewsController@query']);
+    Route::any('/', ['as' => 'index','uses' => 'NewsController@index']);
+    Route::any('/add', ['as' => 'add','uses' => 'NewsController@add']);
+    Route::any('/update', ['as' => 'update','uses' => 'NewsController@update']);
+    Route::any('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
+    Route::any('/query', ['as' => 'query','uses' => 'NewsController@query']);
 
     Route::match(['get', 'post'], '/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
     Route::match(['get', 'post'], '/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
