@@ -5,9 +5,7 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods:POST,GET,OPTIONS,PUT,DELETE');
-header('Access-Control-Allow-Headers:DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type');
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
