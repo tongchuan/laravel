@@ -23,26 +23,36 @@ Route::get('/user', function () {
   }';
     // return view('welcome');
 });
-Route::group(['middleware'=>'cors', 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin::'], function(){
-    Route::any('/', ['as' => 'index','uses' => 'AdminController@index']);
-    Route::any('/add', ['as' => 'add','uses' => 'AdminController@add']);
-    Route::any('/list', ['as' => 'list','uses' => 'AdminController@getList']);
-    Route::any('/login', ['as' => 'login','uses' => 'AdminController@login']);
+Route::group(['prefix' => 'api',],function(){
+    Route::group(['middleware'=>'cors', 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'AdminController@index']);
+        Route::any('/add', ['as' => 'add','uses' => 'AdminController@add']);
+        Route::any('/getlist', ['as' => 'getlist','uses' => 'AdminController@getlist']);
+        Route::any('/modify', ['as' => 'modify','uses' => 'AdminController@modify']);
+        Route::any('/register', ['as' => 'register','uses' => 'AdminController@register']);
+        Route::any('/signin', ['as' => 'signin','uses' => 'AdminController@signin']);
+        Route::any('/issignin', ['as' => 'issignin','uses' => 'AdminController@issignin']);
+        Route::any('/signout', ['as' => 'signout','uses' => 'AdminController@signout']);
+        Route::any('/modifypwd', ['as' => 'modifypwd','uses' => 'AdminController@modifypwd']);
+        
+    });
+    Route::group(['middleware'=>'api', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'NewsController@index']);
+        Route::any('/add', ['as' => 'add','uses' => 'NewsController@add']);
+        Route::any('/update', ['as' => 'update','uses' => 'NewsController@update']);
+        Route::any('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
+        Route::any('/query', ['as' => 'query','uses' => 'NewsController@query']);
+
+        Route::match(['get', 'post'], '/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
+        Route::match(['get', 'post'], '/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
+        Route::match(['get', 'post'], '/typeupdate/{id}', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
+        Route::match(['get', 'post'], '/typedelete/{id}', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
+        Route::match(['get', 'post'], '/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
+    });
 });
 
-Route::group(['middleware'=>'api', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
-    Route::any('/', ['as' => 'index','uses' => 'NewsController@index']);
-    Route::any('/add', ['as' => 'add','uses' => 'NewsController@add']);
-    Route::any('/update', ['as' => 'update','uses' => 'NewsController@update']);
-    Route::any('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
-    Route::any('/query', ['as' => 'query','uses' => 'NewsController@query']);
 
-    Route::match(['get', 'post'], '/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
-    Route::match(['get', 'post'], '/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
-    Route::match(['get', 'post'], '/typeupdate/{id}', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
-    Route::match(['get', 'post'], '/typedelete/{id}', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
-    Route::match(['get', 'post'], '/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
-});
+
 
 Route::get('foo', function() {
 	return 'foo get';
