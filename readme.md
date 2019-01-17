@@ -298,3 +298,8 @@ composer update
 
 fastcgi.conf
 fastcgi_param PHP_ADMIN_VALUE "open_basedir=:/wwwroot/laravel:/tmp/:/proc/";
+
+
+php artisan make:controller Admin/AdminController
+php artisan make:middleware _Name_Middleware
+php artisan make:middleware AdminMiddleware

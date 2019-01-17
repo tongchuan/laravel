@@ -17,6 +17,15 @@ class UserController extends Controller
   public function showProfile(){
     return 'showProfile';
   }
+  public function login(){
+    $cookie = $request->cookie('test');
+    return $cookie.'343434343434';
+    // if($cookie){
+    //     $data = null;
+    //     $data['message'] = '请登录';
+    //     return $data;
+    // }
+  }
 }
 
 ?>

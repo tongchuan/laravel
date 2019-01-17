@@ -13,7 +13,7 @@
 */
 
 Route::get('/', function () {
-  return 'Hello World Test 111';
+  return 'Hello World';
     // return view('welcome');
 });
 Route::get('/user', function () {
@@ -23,8 +23,14 @@ Route::get('/user', function () {
   }';
     // return view('welcome');
 });
+Route::group(['middleware'=>'cors', 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin::'], function(){
+    Route::any('/', ['as' => 'index','uses' => 'AdminController@index']);
+    Route::any('/add', ['as' => 'add','uses' => 'AdminController@add']);
+    Route::any('/list', ['as' => 'list','uses' => 'AdminController@getList']);
+    Route::any('/login', ['as' => 'login','uses' => 'AdminController@login']);
+});
 
-Route::group(['middleware'=>'cors', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
+Route::group(['middleware'=>'api', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
     Route::any('/', ['as' => 'index','uses' => 'NewsController@index']);
     Route::any('/add', ['as' => 'add','uses' => 'NewsController@add']);
     Route::any('/update', ['as' => 'update','uses' => 'NewsController@update']);

@@ -18,6 +18,7 @@ class NewsController extends Controller
   }
   public function add(Request $request){
     // DB::insert('insert into')
+    return $this->getSuccess();
     return var_dump($request->query());
     return var_dump($request);
   }
