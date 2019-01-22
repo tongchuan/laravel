@@ -1,4 +1,33 @@
+drop table if exists `t_menu_type`;
+create table `t_menu_type` (
+  `id` int(11) unsigned auto_increment not null comment 'id 自动增长',
+  `name` varchar(200) not null default '' comment '标题',
+  `enname` varchar(50) not null default '' comment '英文名',
+  `link` varchar(300) default null comment '链接地址',
+  `target` varchar(300) default null comment '链接目标',
+  `pic` varchar(200) default null comment '图片地址',
+  `create_time` TIMESTAMP not null default CURRENT_TIMESTAMP comment '创建时间',
+  `delete` tinyint(1)  default 0 comment '是否删除',
+  `order` double default 0 comment '排序',
+  primary key(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+drop table if exists `t_menu`;
+create table `t_menu` (
+  `id` int(11) unsigned auto_increment not null comment 'id 自动增长',
+  `type_id` int(11) unsigned default null comment '类别id',
+  `parentid` int(11) default null comment '父类id',
+  `name` varchar(200) not null default '' comment '标题',
+  `enname` varchar(50) not null default '' comment '英文名',
+  `link` varchar(300) default null comment '链接地址',
+  `target` varchar(300) default null comment '链接目标',
+  `pic` varchar(200) default null comment '图片地址',
+  `create_time` TIMESTAMP not null default CURRENT_TIMESTAMP comment '创建时间',
+  `delete` tinyint(1)  default 0 comment '是否删除',
+  `order` double default 0 comment '排序',
+  CONSTRAINT `t_menu_type_id_t_menu_id` FOREIGN KEY (`type_id`) REFERENCES `t_menu_type` (`id`),
+  primary key(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 drop table if exists `t_admin`;
 create table `t_admin` (

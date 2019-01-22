@@ -12,6 +12,17 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
+	$user = DB::table('users')->select('id')->orderBy(DB::raw('RAND()'))->first();
+    if(empty($user))
+    {
+        $user->id = 0;
+    }
+
+    $article = DB::table('articles')->select('id')->orderBy(DB::raw('RAND()'))->first();
+    if(empty($article))
+    {
+        $article->id = 0;
+    }
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

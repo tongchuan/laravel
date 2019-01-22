@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+    	$this->call(CommentsTableSeeder::class); // 会调用CommentsTableSeeder的run方法
         // $this->call(UsersTableSeeder::class);
     }
 }
