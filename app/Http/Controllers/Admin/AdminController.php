@@ -18,11 +18,11 @@ class AdminController extends Controller
 		$this->table = 't_admin';
 	}
 	public function index(){
-		echo Hash::make('zhang');
-		exit;
-		$sql = "select column_name from information_schema.columns where table_name='t_admin' order by COLUMN_NAME desc";
+		// echo Hash::make('zhang');
+		// exit;// order by COLUMN_NAME desc
+		$sql = "select column_name from information_schema.columns where table_name='t_admin'";
 		$columns = DB::select($sql);
-      return var_dump(json_encode($columns));
+      return $columns;
 	}
 	public function modify(Request $request){
 		$result = $this->getSuccess();
@@ -38,32 +38,33 @@ class AdminController extends Controller
 			}
 			$db = $dblist[0];
 			$data = array();
-			$data['zip_card'] = $request->input('zip_card', $db->zip_card);
-			$data['username'] = $request->input('username', $db->username);
-			$data['tel2'] = $request->input('tel2', $db->tel2);
-			$data['tel'] = $request->input('tel', $db->tel);
-			$data['signature'] = $request->input('signature', $db->signature);
-			$data['sex'] = $request->input('sex', $db->sex);
-			$data['photo'] = $request->input('photo', $db->photo);
-			// $data['password'] = $request->input('password', $db->);
-			$data['order'] = $request->input('order', $db->order);
-			$data['name'] = $request->input('name', $db->name);
-			$data['mobile2'] = $request->input('mobile2', $db->mobile2);
-			$data['mobile'] = $request->input('mobile', $db->mobile);
-			$data['link'] = $request->input('link', $db->link);
-			$data['integral'] = $request->input('integral', $db->integral);
-			$data['grade'] = $request->input('grade', $db->grade);
-			$data['enname'] = $request->input('enname', $db->enname);
-			$data['email'] = $request->input('email', $db->email);
-			$data['delete'] = $request->input('delete', $db->delete);
-			$data['create_time'] = $request->input('create_time', $db->create_time);
-			$data['company_tel'] = $request->input('company_tel', $db->company_tel);
-			$data['company_address'] = $request->input('company_address', $db->company_address);
-			$data['company'] = $request->input('company', $db->company);
-			$data['card'] = $request->input('card', $db->card);
-			$data['birthday'] = $request->input('birthday', $db->birthday);
-			$data['age'] = $request->input('age', $db->age);
-			$data['address'] = $request->input('address', $db->address);
+			// $data['id']=$request->input('id',$db->id);
+			$data['username']=$request->input('username',$db->username);
+			$data['password']=$request->input('password',$db->password);
+			$data['name']=$request->input('name',$db->name);
+			$data['enname']=$request->input('enname',$db->enname);
+			$data['age']=$request->input('age',$db->age);
+			$data['sex']=$request->input('sex',$db->sex);
+			$data['birthday']=$request->input('birthday',$db->birthday);
+			$data['mobile']=$request->input('mobile',$db->mobile);
+			$data['mobile2']=$request->input('mobile2',$db->mobile2);
+			$data['tel']=$request->input('tel',$db->tel);
+			$data['tel2']=$request->input('tel2',$db->tel2);
+			$data['company_tel']=$request->input('company_tel',$db->company_tel);
+			$data['email']=$request->input('email',$db->email);
+			$data['address']=$request->input('address',$db->address);
+			$data['company']=$request->input('company',$db->company);
+			$data['company_address']=$request->input('company_address',$db->company_address);
+			$data['card']=$request->input('card',$db->card);
+			$data['zip_card']=$request->input('zip_card',$db->zip_card);
+			$data['create_time']=$request->input('create_time',$db->create_time);
+			$data['delete']=$request->input('delete',$db->delete);
+			$data['order']=$request->input('order',$db->order);
+			$data['link']=$request->input('link',$db->link);
+			$data['photo']=$request->input('photo',$db->photo);
+			$data['signature']=$request->input('signature',$db->signature);
+			$data['integral']=$request->input('integral',$db->integral);
+			$data['grade']=$request->input('grade',$db->grade);
 			DB::table($this->table)->where('id','=',$id)->update($data);
 			$result['data'] = DB::table($this->table)->where('id','=',$id)->get();
 			// throw new Exception('33ddd');
@@ -80,32 +81,33 @@ class AdminController extends Controller
 		// {"username":"root","password":"root","sex":"男","age":30,"email":"tongchuanxing@163.com","name":"tongchuanxing","enname":"zhang"}
 		try{
 			$data = array();
-			$data['zip_card'] = $request->input('zip_card', null);
-			$data['username'] = $request->input('username', null);
-			$data['tel2'] = $request->input('tel2', null);
-			$data['tel'] = $request->input('tel', null);
-			$data['signature'] = $request->input('signature', null);
-			$data['sex'] = $request->input('sex', null);
-			$data['photo'] = $request->input('photo', null);
-			$data['password'] = $request->input('password', null);
-			$data['order'] = $request->input('order', null);
-			$data['name'] = $request->input('name', null);
-			$data['mobile2'] = $request->input('mobile2', null);
-			$data['mobile'] = $request->input('mobile', null);
-			$data['link'] = $request->input('link', null);
-			$data['integral'] = $request->input('integral', null);
-			$data['grade'] = $request->input('grade', null);
-			$data['enname'] = $request->input('enname', null);
-			$data['email'] = $request->input('email', null);
-			$data['delete'] = $request->input('delete', null);
-			$data['create_time'] = $request->input('create_time', null);
-			$data['company_tel'] = $request->input('company_tel', null);
-			$data['company_address'] = $request->input('company_address', null);
-			$data['company'] = $request->input('company', null);
-			$data['card'] = $request->input('card', null);
-			$data['birthday'] = $request->input('birthday', null);
-			$data['age'] = $request->input('age', null);
-			$data['address'] = $request->input('address', null);
+			// $data['id']=$request->input('id',null);
+			$data['username']=$request->input('username',null);
+			$data['password']=$request->input('password',null);
+			$data['name']=$request->input('name',null);
+			$data['enname']=$request->input('enname',null);
+			$data['age']=$request->input('age',null);
+			$data['sex']=$request->input('sex',null);
+			$data['birthday']=$request->input('birthday',null);
+			$data['mobile']=$request->input('mobile',null);
+			$data['mobile2']=$request->input('mobile2',null);
+			$data['tel']=$request->input('tel',null);
+			$data['tel2']=$request->input('tel2',null);
+			$data['company_tel']=$request->input('company_tel',null);
+			$data['email']=$request->input('email',null);
+			$data['address']=$request->input('address',null);
+			$data['company']=$request->input('company',null);
+			$data['company_address']=$request->input('company_address',null);
+			$data['card']=$request->input('card',null);
+			$data['zip_card']=$request->input('zip_card',null);
+			$data['create_time']=$request->input('create_time',null);
+			$data['delete']=$request->input('delete',0);
+			$data['order']=$request->input('order',0);
+			$data['link']=$request->input('link',null);
+			$data['photo']=$request->input('photo',null);
+			$data['signature']=$request->input('signature',null);
+			$data['integral']=$request->input('integral',null);
+			$data['grade']=$request->input('grade',null);
 			$id = DB::table($this->table)->insertGetId($data);
 			$data['id']=$id;
 			$result['data'] = $data;
@@ -120,7 +122,12 @@ class AdminController extends Controller
 	public function getlist(Request $request){
 		$result = $this->getSuccess();
 		try{
-			$data = DB::table($this->table)->select()->get();
+			$where = array('0'=>array('delete','=',0));
+			$parameter = $request->input('where',array());
+			foreach ($parameter as $key => $value){
+				$where[count($where)]=array($value['name'],$value['operat'],$value['value']);
+			}
+			$data = DB::table($this->table)->select()->where($where)->get();
 			$result['data'] = $data;
 		}catch(Exception $e){
 			$result = $this->getError();
@@ -129,6 +136,36 @@ class AdminController extends Controller
 			return $result;
 		}
 	}
+	public function count($where){
+		$result = DB::table($this->table)->where($where)->count();
+    	return $result;
+	}
+	public function getlistpage(Request $request){
+		$result = $this->getSuccess();
+		$where = array('0'=>array('delete','=',0));
+		$parameter = $request->input('where',array());
+		foreach ($parameter as $key => $value){
+			$where[count($where)]=array($value['name'],$value['operat'],$value['value']);
+		}
+		$offset = $request->input('offset',0);
+		$total=$this->count($where);
+		$pageSize = $request->input('pagesize',10);
+		$page = null;
+		$page['size'] = $pageSize;
+		$page['total'] = $total;
+		$result['page'] = $page;
+		// {"offset":0,"pagesize":10, "where":[{"name":"name","value":"zhang","operat":"="},{"name":"sex","value":"男","operat":"="}]}
+		try{
+			$data = DB::table($this->table)->select()->where($where)->orderBy('id', 'desc')->offset($offset)->limit($pageSize)->get();
+			$result['data'] = $data;
+		}catch(Exception $e){
+			$result = $this->getError();
+			$result['message'] = $e->getMessage();
+		}finally{
+			return $result;
+		}
+	}
+	
 	/**
 	* 登录
 	*/

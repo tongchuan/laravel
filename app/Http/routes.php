@@ -16,13 +16,13 @@ Route::get('/', function () {
   return 'Hello World';
     // return view('welcome');
 });
-Route::get('/user', function () {
-  return '{
-  	"name": "张彤川",
-  	"age": 30
-  }';
-    // return view('welcome');
-});
+// Route::get('/user', function () {
+//   return '{
+//   	"name": "张彤川",
+//   	"age": 30
+//   }';
+//     // return view('welcome');
+// });
 Route::group(['prefix' => 'api',],function(){
     Route::group(['middleware'=>'cors', 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'Admin::'], function(){
         Route::any('/', ['as' => 'index','uses' => 'AdminController@index']);
@@ -34,65 +34,92 @@ Route::group(['prefix' => 'api',],function(){
         Route::any('/issignin', ['as' => 'issignin','uses' => 'AdminController@issignin']);
         Route::any('/signout', ['as' => 'signout','uses' => 'AdminController@signout']);
         Route::any('/modifypwd', ['as' => 'modifypwd','uses' => 'AdminController@modifypwd']);
+        Route::any('/getlistpage', ['as' => 'getlistpage','uses' => 'AdminController@getlistpage']);
+        
+    });
+    Route::group(['middleware'=>'api', 'namespace' => 'Adv', 'prefix' => 'advtype', 'as' => 'AdvType::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'AdvTypeController@index']);
+        Route::any('/add', ['as' => 'add','uses' => 'AdvTypeController@add']);
+        Route::any('/modify', ['as' => 'modify','uses' => 'AdvTypeController@modify']);
+        Route::any('/getlist', ['as' => 'getlist','uses' => 'AdvTypeController@getlist']);
+        Route::any('/getitem', ['as' => 'getitem','uses' => 'AdvTypeController@getitem']);
+        Route::any('/getlistpage', ['as' => 'getlistpage','uses' => 'AdvTypeController@getlistpage']);
+    });
+    Route::group(['middleware'=>'api', 'namespace' => 'Adv', 'prefix' => 'adv', 'as' => 'Adv::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'AdvController@index']);
+        Route::any('/add', ['as' => 'add','uses' => 'AdvController@add']);
+        Route::any('/modify', ['as' => 'modify','uses' => 'AdvController@modify']);
+        Route::any('/getlist', ['as' => 'getlist','uses' => 'AdvController@getlist']);
+        Route::any('/getitem', ['as' => 'getitem','uses' => 'AdvController@getitem']);
+        Route::any('/getlistpage', ['as' => 'getlistpage','uses' => 'AdvController@getlistpage']);
+    });
+    Route::group(['middleware'=>'api', 'namespace' => 'News', 'prefix' => 'newstype', 'as' => 'NewsType::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'NewsTypeController@index']);
+        Route::any('/add', ['as' => 'add','uses' => 'NewsTypeController@add']);
+        Route::any('/modify', ['as' => 'modify','uses' => 'NewsTypeController@modify']);
+        Route::any('/getlist', ['as' => 'getlist','uses' => 'NewsTypeController@getlist']);
+        Route::any('/getitem', ['as' => 'getitem','uses' => 'NewsTypeController@getitem']);
+        Route::any('/getlistpage', ['as' => 'getlistpage','uses' => 'NewsTypeController@getlistpage']);
         
     });
     Route::group(['middleware'=>'api', 'namespace' => 'News', 'prefix' => 'news', 'as' => 'News::'], function(){
         Route::any('/', ['as' => 'index','uses' => 'NewsController@index']);
         Route::any('/add', ['as' => 'add','uses' => 'NewsController@add']);
-        Route::any('/update', ['as' => 'update','uses' => 'NewsController@update']);
-        Route::any('/delete', ['as' => 'delete','uses' => 'NewsController@delete']);
-        Route::any('/query', ['as' => 'query','uses' => 'NewsController@query']);
-
-        Route::match(['get', 'post'], '/type', ['as' => 'type','uses' => 'NewsTypeController@index']);
-        Route::match(['get', 'post'], '/typeadd', ['as' => 'typeadd','uses' => 'NewsTypeController@add']);
-        Route::match(['get', 'post'], '/typeupdate/{id}', ['as' => 'typeupdate','uses' => 'NewsTypeController@update']);
-        Route::match(['get', 'post'], '/typedelete/{id}', ['as' => 'typedelete','uses' => 'NewsTypeController@delete']);
-        Route::match(['get', 'post'], '/typequery', ['as' => 'typequery','uses' => 'NewsTypeController@query']);
+        Route::any('/modify', ['as' => 'modify','uses' => 'NewsController@modify']);
+        Route::any('/getlist', ['as' => 'getlist','uses' => 'NewsController@getlist']);
+        Route::any('/getitem', ['as' => 'getitem','uses' => 'NewsController@getitem']);
+        Route::any('/getlistpage', ['as' => 'getlistpage','uses' => 'NewsController@getlistpage']);
     });
+    Route::group(['middleware'=>'api', 'namespace' => 'Comm', 'prefix' => 'comm', 'as' => 'Comm::'], function(){
+        Route::any('/', ['as' => 'index','uses' => 'FileController@index']);
+        Route::any('/images/{imagename}', ['as' => 'images','uses' => 'FileController@images']);        
+        Route::any('/upload', ['as' => 'upload','uses' => 'FileController@upload']);
+    });
+    
 });
+// Route::resource('images', 'Comm\FileController');
 
 
 
-
-Route::get('foo', function() {
-	return 'foo get';
-});
-Route::post('foo', function() {
-	return '{"data": "post foo"}';
-});
-Route::put('foo', function() {
-	return '{"data": "put foo"}';
-});
-Route::patch('foo', function() {
-	return '{"data": "patch foo"}';
-});
-Route::delete('foo', function() {
-	return '{"data": "delete foo"}';
-});
-Route::options('foo', function() {
-	return '{"data": "options foo"}';
-});
-// 有时候还需要注册路由响应多个 HTTP 请求——这可以通过 match 方法来实现。或者，甚至可以使用 any 方法注册一个路由来响应所有 HTTP 请求
-Route::match(['get', 'post'], '/match', function () {
-    return '{"data": "match get post"}';
-});
-Route::any('/any', function () {
-    return '{"data": "any"}';
-});
-// 有时我们需要在路由中捕获 URI 片段。比如，要从 URL 中捕获用户 ID，需要通过如下方式定义路由参数
-Route::get('user/{id}', function ($id) {
-    return 'User '.$id;
-});
-Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
-    return 'aa'.$postId.'======='.$commentId;
-});
-// 有时候可能需要指定可选的路由参数，这可以通过在参数名后加一个 ? 标记来实现，这种情况下需要给相应的变量指定默认值：
-Route::get('user1/{name?}', function ($name = null) {
-    return $name;
-});
-Route::get('user1/{name?}', function ($name = 'John') {
-    return $name;
-});
+// Route::get('foo', function() {
+// 	return 'foo get';
+// });
+// Route::post('foo', function() {
+// 	return '{"data": "post foo"}';
+// });
+// Route::put('foo', function() {
+// 	return '{"data": "put foo"}';
+// });
+// Route::patch('foo', function() {
+// 	return '{"data": "patch foo"}';
+// });
+// Route::delete('foo', function() {
+// 	return '{"data": "delete foo"}';
+// });
+// Route::options('foo', function() {
+// 	return '{"data": "options foo"}';
+// });
+// // 有时候还需要注册路由响应多个 HTTP 请求——这可以通过 match 方法来实现。或者，甚至可以使用 any 方法注册一个路由来响应所有 HTTP 请求
+// Route::match(['get', 'post'], '/match', function () {
+//     return '{"data": "match get post"}';
+// });
+// Route::any('/any', function () {
+//     return '{"data": "any"}';
+// });
+// // 有时我们需要在路由中捕获 URI 片段。比如，要从 URL 中捕获用户 ID，需要通过如下方式定义路由参数
+// Route::get('user/{id}', function ($id) {
+//     return 'User '.$id;
+// });
+// Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
+//     return 'aa'.$postId.'======='.$commentId;
+// });
+// // 有时候可能需要指定可选的路由参数，这可以通过在参数名后加一个 ? 标记来实现，这种情况下需要给相应的变量指定默认值：
+// Route::get('user1/{name?}', function ($name = null) {
+//     return $name;
+// });
+// Route::get('user1/{name?}', function ($name = 'John') {
+//     return $name;
+// });
 // 可以使用路由实例上的where方法来约束路由参数的格式。where方法接收参数名和一个正则表达式来定义该参数如何被约束：
 // Route::get('user/{name}', function ($name) {
 //     //
@@ -110,14 +137,14 @@ Route::get('user1/{name?}', function ($name = 'John') {
 
 // 命名路由为生成 URL 或重定向提供了便利。实现也很简单，在定义路由时使用数组键 as 指定路由名称：
 // http://97.64.37.117:8888/users/profile users/profile
-Route::get('users/profile', ['as' => 'profile', function () {
-    return 'users/profile';
-}]);
+// Route::get('users/profile', ['as' => 'profile', function () {
+//     return 'users/profile';
+// }]);
 
-// http://97.64.37.117:8888/u/profile showProfile
-Route::get('u/profile', [
-    'as' => 'profileuser', 'uses' => 'User\UserController@showProfile'
-]);
+// // http://97.64.37.117:8888/u/profile showProfile
+// Route::get('u/profile', [
+//     'as' => 'profileuser', 'uses' => 'User\UserController@showProfile'
+// ]);
 
 /**
  * 这就是一个路由分组 /user和/user/profile都将使用auth中间件。
